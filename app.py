@@ -154,6 +154,12 @@ def create_app(test_config=None):
                 for todo in todos:
                     todo.completed = completed
                 todosJson= [{"id": todo.id, "description": todo.description, "completed": todo.completed,"listId":todo.todolist_id} for todo in todos]
+            elif "description" in jsonRequest:
+                description = jsonRequest['description']
+                todoList.description = description
+                todosJson= [{"id": todo.id, "description": todo.description, "completed": todo.completed,"listId":todo.todolist_id} for todo in todos]
+
+
             else:
                 raise Exception("")
             db.session.commit()

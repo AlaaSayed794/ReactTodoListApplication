@@ -21,7 +21,7 @@ export default class App extends Component {
   render() {
     console.log(this.state)
     const todosss = this.state.loading ? <h2>loading</h2> : <Todos todos={this.state.todos} delTodo={this.delTodo} editTodo={this.editTodo} />
-    const lists = this.state.loading ? <h2>loading</h2> : <Lists getTodos={this.getTodos} lists={this.state.lists} delList={this.delList} editList={this.editList} getTodosByList={this.getTodosByList} />
+    const lists = this.state.loading ? <h2>loading</h2> : <Lists editListDesc={this.editListDesc} getTodos={this.getTodos} lists={this.state.lists} delList={this.delList} editList={this.editList} getTodosByList={this.getTodosByList} />
 
     return (
       <div className="App">
@@ -178,6 +178,30 @@ export default class App extends Component {
             }
             return Todo
           })
+        }
+      )
+    })
+  }
+
+  editListDesc = async (id, description) => {
+    console.log(id)
+    console.log(description)
+    await fetch("http://localhost:5000/todoslists/" + id, {
+      method: "PATCH",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ description })
+    }).then(res => res.json()).then(jsonRes => {
+      this.setState(
+        {
+          lists: this.state.lists.map(List => {
+            if (List.id === id) {
+              List.description = description
+            }
+            return List
+          }),
         }
       )
     })
