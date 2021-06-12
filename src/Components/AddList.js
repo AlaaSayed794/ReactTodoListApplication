@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-
-export default class AddList extends Component {
+import { connect } from 'react-redux'
+import { addList } from '../actions/listsActions'
+class AddList extends Component {
     state = {
         description: ""
     }
@@ -33,3 +34,6 @@ export default class AddList extends Component {
         )
     }
 }
+
+export default connect(null, { addList })(AddList)
+

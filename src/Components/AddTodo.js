@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addTodo } from '../actions/todosActions'
 
-export default class AddTodos extends Component {
+class AddTodos extends Component {
     state = {
         description: "",
         listId: 0
@@ -42,3 +44,9 @@ export default class AddTodos extends Component {
         )
     }
 }
+const mapStateToProps = (state) => ({
+    lists: state.listsReducer.lists
+}
+)
+export default connect(mapStateToProps, { addTodo })(AddTodos)
+

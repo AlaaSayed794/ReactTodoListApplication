@@ -1,7 +1,11 @@
 import React from 'react'
 import { Button, Table } from "react-bootstrap"
 import { Link } from 'react-router-dom'
-export default function Lists(props) {
+import { connect } from 'react-redux'
+import { getTodosByList, getTodos } from '../actions/todosActions'
+import { delList, editList, editListDesc } from '../actions/listsActions'
+
+function Lists(props) {
     return (
         <div>
             <h1>Lists</h1>
@@ -32,3 +36,9 @@ export default function Lists(props) {
         </div>
     )
 }
+
+const mapStateToProps = (state) => ({
+    lists: state.listsReducer.lists
+}
+)
+export default connect(mapStateToProps, { getTodosByList, getTodos, delList, editList, editListDesc })(Lists)

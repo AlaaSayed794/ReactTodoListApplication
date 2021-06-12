@@ -1,7 +1,8 @@
 import React from 'react'
 import { Button, Table } from "react-bootstrap"
-
-export default function Todos(props) {
+import { connect } from 'react-redux'
+import { delTodo, editTodo } from '../actions/todosActions'
+function Todos(props) {
     return (
         <div>
             <h1>Todos</h1>
@@ -29,4 +30,9 @@ export default function Todos(props) {
     )
 }
 
+const mapStateToProps = (state) => ({
+    todos: state.todosReducer.todos
+}
+)
+export default connect(mapStateToProps, { delTodo, editTodo })(Todos)
 

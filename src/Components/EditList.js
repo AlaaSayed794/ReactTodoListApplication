@@ -10,7 +10,7 @@ export default class EditList extends Component {
         event.preventDefault()
         if (this.state.description.length > 0) {
 
-            await this.props.location.editListDesc(this.props.match.params.id, this.state.description)
+            this.props.location.editListDesc(this.props.match.params.id, this.state.description)
             this.setState({
                 redirect: true
             }
